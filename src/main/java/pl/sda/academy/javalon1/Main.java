@@ -17,7 +17,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //zad1();
-        RateExchange rateExchangeForUrl = getRateExchangeForParams("USD", "2016-04-04");
+        String currencyUsd = "USD";
+        RateExchange rateExchangeForUrl = getRateExchangeForParams(currencyUsd, "2016-04-04");
         double bid = rateExchangeForUrl.getRates().get(0).getBid();
 
         RateExchange rateExchangeForUrl2 = getRateExchangeForParams("GBP", "2016-04-04");
@@ -28,17 +29,18 @@ public class Main {
 
     }
 
+    private static RateExchange getRateExchangeForParams(String currency, String date) throws IOException {
+        String urlForNbp = createUrlForNbp(currency, date);
+        String dataFromNbp = downloadData(urlForNbp);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(dataFromNbp, RateExchange.class);
+    }
+
     private static String createUrlForNbp(String currency, String date) {
         return "http://api.nbp.pl/api/exchangerates/rates/c/" +
                 currency +
                 "/" + date +
                 "/?format=json";
-    }
-
-    private static RateExchange getRateExchangeForParams(String currency, String date) throws IOException {
-        String dataFromNbp = downloadData(createUrlForNbp(currency, date));
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(dataFromNbp, RateExchange.class);
     }
 
     private static String downloadData(String url) throws IOException {
