@@ -1,78 +1,47 @@
 package pl.sda.academy.javalon1;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import pl.sda.academy.javalon1.example.ExampleObject;
-import pl.sda.academy.javalon1.nbp.RateExchange;
+import pl.sda.academy.javalon1.nbp.dto.currencies.Currency;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        //zad1();
-        String currencyUsd = "USD";
-        RateExchange rateExchangeForUrl = getRateExchangeForParams(currencyUsd, "2016-04-04");
-        double bid = rateExchangeForUrl.getRates().get(0).getBid();
+    public static void main(String[] args) {
+        new Predicate<Currency>() {
+            @Override
+            public boolean test(Currency currency) {
+                return currency.getCode().length() > 3;
+            }
+        };
 
-        RateExchange rateExchangeForUrl2 = getRateExchangeForParams("GBP", "2016-04-04");
-        double bid2 = rateExchangeForUrl2.getRates().get(0).getBid();
+        Predicate<Currency> pred = x -> x.getCode().length() > 3;
 
-        System.out.println(bid);
-        System.out.println(bid2);
+        Predicate<Currency> pred2 = (Currency currency) -> currency.getCode().length() > 3;
 
-    }
+        Optional<Long> reduce = Stream.of("11", "222", "3333", "44444")
+                .filter(x -> x.length() > 2)
+                .peek(System.out::println)
+                .map(x -> x + x)
+                .peek(System.out::println)
+                .map(Long::valueOf)
+                .peek(System.out::println)
+                .map(x -> x + x)
+                .peek(System.out::println)
+                .reduce((x, y) -> {
+                    return x = x + y;
+                });
+        System.out.println(reduce.get());
 
-    public static String getBuyCourseForCurrencyAndDate(String currency, String date) throws IOException {
-        RateExchange rateExchangeForUrl2 = getRateExchangeForParams(currency, date);
-        double bid = rateExchangeForUrl2.getRates().get(0).getBid();
-        return String.valueOf(bid);
+        Optional<Double> reduceResult = IntStream.range(1, 1000).boxed()
+                .filter((Integer x) -> x % 2 != 0)
+                .map(x -> (double) 1 / x)
+                .reduce((x, y) -> x = x + y);
+        Double value = reduceResult.orElse(-1.0);
+        System.out.println(value);
 
-    }
-
-    private static RateExchange getRateExchangeForParams(String currency, String date) throws IOException {
-        String urlForNbp = createUrlForNbp(currency, date);
-        String dataFromNbp = downloadData(urlForNbp);
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(dataFromNbp, RateExchange.class);
-    }
-
-    private static String createUrlForNbp(String currency, String date) {
-        return "http://api.nbp.pl/api/exchangerates/rates/c/" +
-                currency +
-                "/" + date +
-                "/?format=json";
-    }
-
-    private static String downloadData(String url) throws IOException {
-
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet(url);
-        HttpResponse response = client.execute(request);
-
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(response.getEntity().getContent()));
-
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        return result.toString();
-    }
-
-    private static void zad1() throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        File jsonFile = new File("src/main/resources/toParse.json");
-        ExampleObject exampleObject = objectMapper.readValue(jsonFile, ExampleObject.class);
-        System.out.println(exampleObject);
-        System.out.println(exampleObject.getProperties().getFoo().getType());
     }
 
 }

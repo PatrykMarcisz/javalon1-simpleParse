@@ -5,17 +5,17 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import pl.sda.academy.javalon1.Main;
-
-import java.io.IOException;
+import pl.sda.academy.javalon1.service.ExchangeService;
 
 public class Application extends javafx.application.Application {
-    public void start(Stage primaryStage) throws Exception {
+
+    public void start(Stage primaryStage) {
+
+        ExchangeService exchangeService = new ExchangeService();
+
         primaryStage.setTitle("Hello World!");
 
         VBox root = new VBox();
@@ -31,12 +31,8 @@ public class Application extends javafx.application.Application {
                 String currencyValue = currency.getText();
                 String dateValue = date.getText();
 
-                try {
-                    String buyCourse = Main.getBuyCourseForCurrencyAndDate(currencyValue, dateValue);
-                    result.setText(buyCourse);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                String buyCourse = exchangeService.getBuyCourseForCurrencyAndDate(currencyValue, dateValue);
+                result.setText(buyCourse);
             }
         });
 

@@ -1,5 +1,6 @@
-package pl.sda.academy.javalon1.nbp;
+package pl.sda.academy.javalon1.nbp.dto.exchange;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

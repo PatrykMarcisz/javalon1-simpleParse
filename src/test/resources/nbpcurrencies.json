@@ -1,0 +1,88 @@
+[
+  {
+    "table": "C",
+    "no": "129/C/NBP/2019",
+    "tradingDate": "2019-07-04",
+    "effectiveDate": "2019-07-05",
+    "rates": [
+      {
+        "currency": "dolar amerykański",
+        "code": "USD",
+        "bid": 3.7249,
+        "ask": 3.8001
+      },
+      {
+        "currency": "dolar australijski",
+        "code": "AUD",
+        "bid": 2.6164,
+        "ask": 2.6692
+      },
+      {
+        "currency": "dolar kanadyjski",
+        "code": "CAD",
+        "bid": 2.8530,
+        "ask": 2.9106
+      },
+      {
+        "currency": "euro",
+        "code": "EUR",
+        "bid": 4.2013,
+        "ask": 4.2861
+      },
+      {
+        "currency": "forint (Węgry)",
+        "code": "HUF",
+        "bid": 0.013009,
+        "ask": 0.013271
+      },
+      {
+        "currency": "frank szwajcarski",
+        "code": "CHF",
+        "bid": 3.7789,
+        "ask": 3.8553
+      },
+      {
+        "currency": "funt szterling",
+        "code": "GBP",
+        "bid": 4.6824,
+        "ask": 4.7770
+      },
+      {
+        "currency": "jen (Japonia)",
+        "code": "JPY",
+        "bid": 0.034547,
+        "ask": 0.035245
+      },
+      {
+        "currency": "korona czeska",
+        "code": "CZK",
+        "bid": 0.1650,
+        "ask": 0.1684
+      },
+      {
+        "currency": "korona duńska",
+        "code": "DKK",
+        "bid": 0.5629,
+        "ask": 0.5743
+      },
+      {
+        "currency": "korona norweska",
+        "code": "NOK",
+        "bid": 0.4362,
+        "ask": 0.4450
+      },
+      {
+        "currency": "korona szwedzka",
+        "code": "SEK",
+        "bid": 0.3992,
+        "ask": 0.4072
+      },
+      {
+        "currency": "SDR (MFW)",
+        "code": "XDR",
+        "bid": 5.1552,
+        "ask": 5.2594
+      }
+    ]
+  }
+]

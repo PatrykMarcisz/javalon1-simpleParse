@@ -1,7 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pl.sda.academy.javalon1.nbp.RateExchange;
+import pl.sda.academy.javalon1.nbp.dto.exchange.RateExchange;
 
 import java.io.File;
 import java.io.IOException;
