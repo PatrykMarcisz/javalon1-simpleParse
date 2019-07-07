@@ -29,6 +29,13 @@ public class Main {
 
     }
 
+    public static String getBuyCourseForCurrencyAndDate(String currency, String date) throws IOException {
+        RateExchange rateExchangeForUrl2 = getRateExchangeForParams(currency, date);
+        double bid = rateExchangeForUrl2.getRates().get(0).getBid();
+        return String.valueOf(bid);
+
+    }
+
     private static RateExchange getRateExchangeForParams(String currency, String date) throws IOException {
         String urlForNbp = createUrlForNbp(currency, date);
         String dataFromNbp = downloadData(urlForNbp);
