@@ -16,6 +16,7 @@ public class CurrencyService {
     }
 
     public List<String> getCurrenciesList() {
+
         CurrencyExchange data = currencyApi.getData();
         return data.getRates()
                 .stream()

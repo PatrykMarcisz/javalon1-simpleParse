@@ -2,6 +2,7 @@ package pl.sda.academy.javalon1.repository.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.sda.academy.javalon1.nbp.dto.exchange.RateExchange;
+import pl.sda.academy.javalon1.service.subpackage.C;
 
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ public class ExchangeApi {
         objectMapper = new ObjectMapper();
     }
 
-    private static String createUrlForNbp(String currency, String date) {
+    public String createUrlForNbp(String currency, String date) {
         return "http://api.nbp.pl/api/exchangerates/rates/c/" +
                 currency +
                 "/" + date +
